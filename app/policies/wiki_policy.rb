@@ -1,7 +1,7 @@
 class WikiPolicy < ApplicationPolicy
 
   def index?
-    authorize Wiki
+    true
   end
 
   def create?
