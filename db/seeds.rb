@@ -5,3 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+
+5 times do
+  User.create!(Faker::Name.name)
+end
+users = User.all
+
+20 times do
+  Wiki.create!(
+    user:  users.sample
+    title: Faker::String.random(5..20)
+    body:  Faker::String.random(50..200)
+  )
+end
+wikis = Wiki.all

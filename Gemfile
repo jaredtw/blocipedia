@@ -39,6 +39,8 @@ source 'https://rubygems.org'
 
  gem 'pundit'
 
+ gem 'faker'
+
  group :development do
    gem 'listen', '~> 3.0.5'
    gem 'rspec-rails', '~> 3.0'
