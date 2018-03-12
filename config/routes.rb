@@ -3,6 +3,12 @@ Rails.application.routes.draw do
 
   resources :wikis
 
+  resources :charges, only: [:new, :create]
+
+  resources :users
+
+  match "users/:id/downgrade" => "users#downgrade", :as => "downgrade_user", via: [:get, :post]
+  
   get 'welcome/index'
 
   root 'welcome#index'
