@@ -1,0 +1,14 @@
+<div class="media">
+  <div class="media-body">
+    <% if current_user.premium? || current_user.admin? %>
+      <h4 class="media-heading">
+        <%= link_to wiki.title, wiki %>
+      </h4>
+    <% elsif wiki.private == false %>
+        <h4 class="media-heading">
+          <%= link_to wiki.title, wiki %>
+        </h4>
+    <% end %>
+
+  </div>
+</div>

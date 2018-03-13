@@ -3,8 +3,9 @@
     <%= @wiki.title %> <br>
   </h1>
   <small>
-    submitted <%= time_ago_in_words(@wiki.created_at) %> ago
+       submitted <%= time_ago_in_words(@wiki.created_at) %> ago
   </small>
+  <p> Private? <%= @wiki.private %></p>
 </div>
 
 <div class="row">
