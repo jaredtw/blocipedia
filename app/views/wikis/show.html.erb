@@ -6,6 +6,8 @@
        submitted <%= time_ago_in_words(@wiki.created_at) %> ago
   </small>
   <p> Private? <%= @wiki.private %></p>
+  <p> Owner: <%= @wiki.user.name %></p>
+  <%= render partial: 'collaborators/list' %>  
 </div>
 
 <div class="row">

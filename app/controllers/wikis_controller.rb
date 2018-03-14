@@ -8,6 +8,8 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
+    @users = User.find_by(id: session[:user_id])
+    @collaborators = @wiki.collaborators
   end
 
   def new
@@ -15,8 +17,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = wikis.build(wiki_params)
-    @wiki.user = current_user
+    @wiki = current_user.wikis.build(wiki_params)
     authorize @wiki
 
     if @wiki.save
@@ -30,6 +31,8 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @users = User.where.not(id: current_user.id)
+    @collaborators = @wiki.collaborators
   end
 
   def update
@@ -37,7 +40,7 @@ class WikisController < ApplicationController
     @wiki.assign_attributes(wiki_params)
     authorize @wiki
 
-    if @wiki.save
+    if @wiki.update_attributes(wiki_params) #@wiki.save
       flash[:notice] = "Wiki was updated."
       redirect_to @wiki
     else
@@ -62,6 +65,6 @@ class WikisController < ApplicationController
   private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :body)
+    params.require(:wiki).permit(:title, :body, :private)
   end
 end

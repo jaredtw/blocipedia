@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   has_many :wikis, dependent: :destroy
+  has_many :collaborators
+  has_many :wiki_collabs, source: 'wiki', through: :collaborators
 
   before_save { self.email = email.downcase }
   before_save { self.role ||= :standard }
