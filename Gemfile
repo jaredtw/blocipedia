@@ -43,6 +43,8 @@ source 'https://rubygems.org'
 
  gem 'stripe'
 
+ gem 'redcarpet'
+
  group :development do
    gem 'listen', '~> 3.0.5'
    gem 'rspec-rails', '~> 3.0'
