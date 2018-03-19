@@ -2,13 +2,14 @@ class WikisController < ApplicationController
   before_action :require_sign_in, except: [:index, :show]
 
   def index
-    @user = User.find_by(id: session[:user_id])
-    @wikis = Wiki.all
+    @user = current_user
+    @wikis = policy_scope(Wiki)
+
   end
 
   def show
     @wiki = Wiki.find(params[:id])
-    @users = User.find_by(id: session[:user_id])
+    @users = current_user
     @collaborators = @wiki.collaborators
   end
 
@@ -31,8 +32,9 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
-    @users = User.where.not(id: current_user.id)
+    @users = current_user
     @collaborators = @wiki.collaborators
+    authorize @wiki
   end
 
   def update
