@@ -4,7 +4,6 @@ class WikisController < ApplicationController
   def index
     @user = current_user
     @wikis = policy_scope(Wiki)
-
   end
 
   def show
